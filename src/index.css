@@ -18,3 +18,6 @@ input:hover {
     box-shadow: 1px 1px 3px 0px rgba(114, 114, 114, 0.5);
     transition: 0.2s ease-in;
 }
+td {
+    padding: 5px;
+}

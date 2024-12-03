@@ -10,8 +10,8 @@ const Navbar = () => {
       <div className="flex">
         <button className="mx-3">Home</button>
         <button className="mx-3">Map</button>
+        <button className="mx-3">Doctors</button>
         <button className="mx-3">About Us</button>
-        <button className="mx-3">Help</button>
       </div>
       {/* END */}
       <div className="flex items-center ">
