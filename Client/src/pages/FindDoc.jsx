@@ -17,7 +17,7 @@ const FindDoc = () => {
       </div>
 
       {/* Flexbox centered content */}
-      <div className="flex justify-center items-center h-[150px] mt-[30px] bg-sky-100 border-2 border-[#7FBED3] w-[400px] mx-auto rounded-t-3xl">
+      <div className="flex justify-center items-center h-[150px] mt-[30px] bg-[#CFE6EE] border-2 border-[#7FBED3] w-[400px] mx-auto rounded-t-3xl">
         <div className="grid grid-rows-2 gap-4">
           <input
             placeholder="Pickup Location"
