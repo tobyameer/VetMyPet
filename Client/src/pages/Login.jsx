@@ -22,7 +22,7 @@ const Login = () => {
             <p className="my-[6px] font-bold text-[18px] ">Password</p>
             <input type="password" placeholder="********" />
             <button className="mt-[35px] bg-black text-white w-[200px] h-[38px]">
-              <Link to="/home">Sign in </Link>
+              <Link to="/">Sign in </Link>
             </button>
           </div>
           {/* SingUp */}

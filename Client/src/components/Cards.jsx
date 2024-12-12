@@ -18,7 +18,7 @@ const Cards = () => {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </p>
-        <Link to="/">
+        <Link to="/login">
           <button className=" hover:bg-white hover:text-blue-500 border-2 border-solid w-[100px] text-[15px] h-[40px] rounded-2xl">
             Sign Up
           </button>
@@ -53,7 +53,7 @@ const Cards = () => {
           aliquip ex ea commodo consequat.
         </p>
         <button className=" hover:bg-white hover:text-blue-500 border-2 border-solid w-[100px] text-[15px] h-[40px] rounded-2xl">
-          Find
+          <Link to="/findDoc">Find</Link>
         </button>
       </div>
     </div>

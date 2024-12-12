@@ -1,20 +1,37 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import background from "../images/background_vet.png";
 import axios from "axios";
 
 const Signup = () => {
-  const [name, setName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("", { name, lastName, email, password })
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
+      .post("http://localhost:3001/singup", {
+        name,
+        lastName,
+        email,
+        password,
+      })
+      .then((result) => {
+        if (result.status == 201) {
+          navigate("/");
+          console.log("User created successfully");
+        }
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          window.alert("Email already exists. Please use a different email");
+        } else {
+          console.log(err);
+        }
+      });
   };
 
   return (
@@ -58,14 +75,12 @@ const Signup = () => {
               placeholder="********"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Link to="/home">
-              <button
-                className="mt-[35px] bg-black text-white w-[200px] h-[38px]"
-                onClick={handleSubmit}
-              >
-                Sign Up
-              </button>
-            </Link>
+            <button
+              className="mt-[35px] bg-black text-white w-[200px] h-[38px]"
+              onClick={handleSubmit}
+            >
+              <Link to="/">Sign Up</Link>
+            </button>
           </div>
           {/* SingUp */}
           <div className="flex justify-center my-3">
