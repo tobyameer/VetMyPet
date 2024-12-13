@@ -13,7 +13,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/singup", {
+      .post("http://localhost:3001/signup", {
         name,
         lastName,
         email,
@@ -21,8 +21,8 @@ const Signup = () => {
       })
       .then((result) => {
         if (result.status == 201) {
-          navigate("/");
-          console.log("User created successfully");
+          navigate("/login");
+          console.log("User Created Successfully!");
         }
       })
       .catch((err) => {
@@ -44,6 +44,7 @@ const Signup = () => {
             <p className="my-[6px] font-semibold text-[18px]">First Name</p>
             <div className="flex items-center pl-4 border-none bg-gray-100 w-[300px] rounded-xl h-[45px]">
               <input
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 placeholder="First Name"
                 className="border-none p-3 bg-inherit placeholder-[gray] hover:outline-none hover:ring-0 hover:border-transparent "
@@ -52,6 +53,7 @@ const Signup = () => {
             <p className="my-[6px] font-semibold text-[18px]">Last Name</p>
             <div className="flex items-center pl-4 border-none bg-gray-100 w-[300px] rounded-xl h-[45px]">
               <input
+                onChange={(e) => setLastName(e.target.value)}
                 type="text"
                 placeholder="Last Name"
                 className="border-none p-3 bg-inherit placeholder-[gray] hover:outline-none hover:ring-0 hover:border-transparent "
@@ -60,6 +62,7 @@ const Signup = () => {
             <p className="my-[6px] font-semibold text-[18px]">Email</p>
             <div className="flex items-center pl-4 border-none bg-gray-100 w-[300px] rounded-xl h-[45px]">
               <input
+                onChange={(e) => setEmail(e.target.value)}
                 type="text"
                 placeholder="Email"
                 className="border-none p-3 bg-inherit placeholder-[gray] hover:outline-none hover:ring-0 hover:border-transparent "
@@ -68,6 +71,7 @@ const Signup = () => {
             <p className="my-[6px] font-semibold text-[18px] ">Password</p>
             <div className="flex items-center pl-4 border-none bg-gray-100 w-[300px] rounded-xl h-[45px]">
               <input
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 placeholder="Password"
                 className="border-none p-3 bg-inherit placeholder-[gray] hover:outline-none hover:ring-0 hover:border-transparent "
@@ -83,8 +87,11 @@ const Signup = () => {
               </a>
             </div>
             <div className="flex justify-center">
-              <button className=" mt-[35px] bg-[#007EA7] text-white w-[300px] h-[45px] rounded-2xl">
-                <Link to="/">Sign Up </Link>
+              <button
+                onClick={handleSubmit}
+                className=" mt-[35px] bg-[#007EA7] text-white w-[300px] h-[45px] rounded-2xl"
+              >
+                Sign Up
               </button>
             </div>
           </div>

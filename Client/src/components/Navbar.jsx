@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { TbWorld } from "react-icons/tb";
 import { FaUser } from "react-icons/fa6";
 
-const Navbar = () => {
+const Navbar = ({ name }) => {
   return (
     <div
       style={{ background: "#007EA7" }}
@@ -33,9 +33,7 @@ const Navbar = () => {
         </div>
         <div className="flex ml-3">
           <FaUser style={{ marginTop: "5px" }} size={13} />
-          <button className="ml-1">
-            <Link to="/login">Log In</Link>
-          </button>
+          <button className="ml-1">{name}</button>
         </div>
       </div>
     </div>

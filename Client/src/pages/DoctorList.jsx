@@ -4,6 +4,7 @@ import Calender from "../components/Calender";
 import Navbar from "../components/Navbar";
 import { FaSearch } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
+import { doctor } from "../dummyData";
 
 const DoctorList = () => {
   return (
@@ -61,78 +62,25 @@ const DoctorList = () => {
           </div>
           {/* List */}
           <div className="grid grid-rows-10 text-center">
-            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-white">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-[#">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-[#">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-[#">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
-            <div className="grid grid-cols-5 py-5 bg-[#">
-              <p>Ahmed</p>
-              <p>Mohamed</p>
-              <p>0100924927</p>
-              <p>13/10/2023</p>
-              <button>Busy</button>
-            </div>
+            {doctor.map((item, index) => (
+              <div
+                index={index}
+                className={
+                  index / 2 == 0
+                    ? "grid grid-cols-5 py-5 bg-[#EFF6F9]"
+                    : "grid grid-cols-5 py-5 bg-white"
+                }
+              >
+                <p>{item.name}</p>
+                <p>{item.lastName}</p>
+                <p>{item.phone}</p>
+                <p>{item.date}</p>
+                <button>{item.status ? "busy" : "free"}</button>
+              </div>
+            ))}
           </div>
         </div>
+
         {/* <div className=" flex flex-col text-center m-3">
             <p></p>
             <ItemList />
@@ -150,3 +98,76 @@ const DoctorList = () => {
 };
 
 export default DoctorList;
+
+{
+  /* <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5 bg-[#EFF6F9]">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>
+            <div className="grid grid-cols-5 py-5">
+              <p>Ahmed</p>
+              <p>Mohamed</p>
+              <p>0100924927</p>
+              <p>13/10/2023</p>
+              <button>Busy</button>
+            </div>*/
+}
