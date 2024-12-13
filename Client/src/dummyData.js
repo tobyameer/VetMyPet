@@ -1,5 +1,6 @@
 export const doctor = [
   {
+    id: 1,
     name: "john",
     lastName: "anderson",
     phone: "01039152324",
@@ -7,13 +8,15 @@ export const doctor = [
     status: true,
   },
   {
+    id: 2,
     name: "bill",
     lastName: "arnold",
     phone: "01035112098",
     date: "20/2/2024",
-    status: true,
+    status: false,
   },
   {
+    id: 3,
     name: "alex",
     lastName: "peter",
     phone: "0108573904",

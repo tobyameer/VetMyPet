@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import ItemList from "../components/ItemList";
 import Calender from "../components/Calender";
 import Navbar from "../components/Navbar";
 import { FaSearch } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { doctor } from "../dummyData";
+import AddAppointment from "../components/AddAppointment";
 
 const DoctorList = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleAppointment = () => {};
   return (
     <div className="bg-white">
       <Navbar />
@@ -23,7 +27,14 @@ const DoctorList = () => {
             />
             <FaSearch color="#007EA7" />
           </div>
-          <button className="flex justify-center items-center bg-[#007EA7] text-white h-[40px] w-[200px] rounded-lg">
+          <button
+            onClick={(e) => setOpen(!open)}
+            className={
+              open
+                ? "hidden"
+                : "flex justify-center items-center bg-[#007EA7] text-white h-[40px] w-[200px] rounded-lg gap-2"
+            }
+          >
             <FaPlus />
             Add Appointment
           </button>
@@ -31,66 +42,10 @@ const DoctorList = () => {
       </div>
 
       {/* Filter */}
-      <div className="grid grid-cols-3 mt-[20px]">
-        <div className=" col-span-2 text-center m-5">
-          <div className="grid grid-cols-5  items-center h-[35px] rounded-xl">
-            <div>
-              <button className=" text-black-300 font-bold text-[12px]">
-                First Name
-              </button>
-            </div>
-            <div>
-              <button className=" text-black font-bold text-[12px]">
-                Last Name
-              </button>
-            </div>
-            <div>
-              <button className=" text-black font-bold text-[12px]">
-                Phone Number
-              </button>
-            </div>
-            <div>
-              <button className=" text-black font-bold text-[12px]">
-                Date
-              </button>
-            </div>
-            <div>
-              <button className=" text-black font-bold text-[12px]">
-                Status
-              </button>
-            </div>
-          </div>
+      <div className="grid mt-[20px]">
+        <div className="flex justify-center col-span-2 text-center m-5">
           {/* List */}
-          <div className="grid grid-rows-10 text-center">
-            {doctor.map((item, index) => (
-              <div
-                index={index}
-                className={
-                  index / 2 == 0
-                    ? "grid grid-cols-5 py-5 bg-[#EFF6F9]"
-                    : "grid grid-cols-5 py-5 bg-white"
-                }
-              >
-                <p>{item.name}</p>
-                <p>{item.lastName}</p>
-                <p>{item.phone}</p>
-                <p>{item.date}</p>
-                <button>{item.status ? "busy" : "free"}</button>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* <div className=" flex flex-col text-center m-3">
-            <p></p>
-            <ItemList />
-            <ItemList />
-            <ItemList />
-            <ItemList />
-          </div> */}
-        {/* Calender */}
-        <div className=" col-span-1 bg-blue-500 w-[full] p-4 ">
-          <Calender />
+          {!open ? <ItemList /> : <AddAppointment />}
         </div>
       </div>
     </div>
