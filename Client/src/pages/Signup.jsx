@@ -13,7 +13,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/signup", {
+      .post("http://localhost:3001/userSignup", {
         name,
         lastName,
         email,

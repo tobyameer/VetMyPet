@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:3001/login",
+        "http://localhost:3001/userLogin",
         { email, password },
         { withCredentials: true }
       )

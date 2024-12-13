@@ -1,11 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const UserModel = require("./models/User");
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const UserModel = require("./models/User");
+const DoctorModel = require("./models/Doctor");
 
 dotenv.config();
 
@@ -43,8 +44,60 @@ app.listen(process.env.PORT, () => {
   console.log(`Server is Running on Port ${process.env.PORT}`);
 });
 
-// Sign Up
-app.post("/signup", async (req, res) => {
+// Sign Up Doctor
+app.post("/docSignup", async (req, res) => {
+  try {
+    const { name, lastName, number, password } = req.body;
+    console.log(name + " " + lastName + " " + number + " " + password);
+    const existingUser = await DoctorModel.findOne({ number });
+    console.log(existingUser);
+    if (existingUser) {
+      return res.status(400).json({ error: "number already taken" });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new DoctorModel({
+      name,
+      lastName,
+      number,
+      password: hashedPassword,
+    });
+    const savedUser = await newUser.save();
+    express.status(201).json(savedUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Doctor Log In
+app.post("/docLogin", async (req, res) => {
+  try {
+    const { number, password } = req.body;
+    const doc = await DoctorModel.findOne({ email });
+    if (doc) {
+      const passwordMatch = await bcrypt.compare(password, doc.password);
+      if (passwordMatch) {
+        req.session.doc = {
+          id: doc._id,
+          name: doc.name,
+          lastName: doc.lastName,
+          number: doc.number,
+        };
+        res.json("Success");
+        console.log(email);
+        console.log(doc.name);
+      } else {
+        res.status(401).json("Password dose'nt match");
+      }
+    } else {
+      res.status(404).json("No Records found");
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Sign Up User
+app.post("/userSignup", async (req, res) => {
   try {
     const { name, lastName, email, password } = req.body;
     console.log(name + " " + lastName + " " + email + " " + password);
@@ -67,8 +120,8 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// Log In
-app.post("/login", async (req, res) => {
+// User Log In
+app.post("/userLogin", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
