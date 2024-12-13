@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 
-const FindDoc = () => {
+const Map = () => {
   return (
     <div className="m-0 p-0 flex flex-col min-h-screen overflow-hidden">
       <Navbar />
@@ -42,4 +42,4 @@ const FindDoc = () => {
   );
 };
 
-export default FindDoc;
+export default Map;

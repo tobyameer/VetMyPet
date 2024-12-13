@@ -1,19 +1,23 @@
 import React from "react";
-import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
-import DoctorList from "./pages/DoctorList";
-import FindDoc from "./pages/FindDoc";
-import Signup from "./pages/Signup";
+import Appointments from "./pages/Appointments";
+import UserLogin from "./pages/UserLogin";
+import UserSignup from "./pages/UserSignup";
+import DoctorLogin from "./pages/DoctorLogin";
+import DoctorSignup from "./pages/DoctorSignup";
+import Map from "./pages/Map";
+
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
       <Route path="/" element={<Home />} />
-      <Route path="/appointments" element={<DoctorList />} />
-      <Route path="/find" element={<FindDoc />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/findDoc" element={<FindDoc />} />
+      <Route path="/map" element={<Map />} />
+      <Route path="/appointments" element={<Appointments />} />
+      <Route path="/userLogin" element={<UserLogin />} />
+      <Route path="/userSignup" element={<UserSignup />} />
+      <Route path="/doctorLogin" element={<DoctorLogin />} />
+      <Route path="/doctorSignup" element={<DoctorSignup />} />
     </Routes>
   );
 }

@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { TbWorld } from "react-icons/tb";
 import { FaUser } from "react-icons/fa6";
 
-const Navbar = ({ name }) => {
+const Navbar = () => {
   return (
     <div
       style={{ background: "#007EA7" }}
-      className=" text-white h-[50px] flex justify-between w-[100%] px-[50px]"
+      className=" text-white h-[50px] flex justify-between w-screen px-[50px]"
     >
       <div className="flex items-center font-bold">Fix My Pet</div>
 
@@ -18,13 +18,12 @@ const Navbar = ({ name }) => {
         </button>
 
         <button className="mx-3">
-          <Link to="/findDoc">Map</Link>
+          <Link to="/map">Map</Link>
         </button>
         <button className="mx-3">
           <Link to="/appointments">Appointments</Link>
         </button>
       </div>
-
       {/* END */}
       <div className="flex items-center">
         <div className="flex mr-3">
@@ -33,7 +32,9 @@ const Navbar = ({ name }) => {
         </div>
         <div className="flex ml-3">
           <FaUser style={{ marginTop: "5px" }} size={13} />
-          <button className="ml-1">{name}</button>
+          <button className="ml-1">
+            <Link to="/userLogin">Login</Link>
+          </button>
         </div>
       </div>
     </div>

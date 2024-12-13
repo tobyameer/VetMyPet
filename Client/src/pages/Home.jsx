@@ -1,11 +1,12 @@
 import React from "react";
-import DoctorList from "./DoctorList";
+import Appointments from "./Appointments";
 import Navbar from "../components/Navbar";
 import homeImg from "../images/marvin-zettl-lIrRtJbNWx8-unsplash.jpg";
 import Services from "../components/Services";
 import Footer from "../components/Footer";
 import Cards from "../components/Cards";
 import { useLocation } from "react-router-dom";
+
 const Home = () => {
   const location = useLocation();
   const user = location.state?.user ?? "Guest";

@@ -1,17 +1,67 @@
-import React, { useState } from "react";
-import { doctor } from "../dummyData";
 import { FaPlus } from "react-icons/fa";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const AddAppointment = () => {
-  const [selectedUser, setSelectedUser] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null); // Initialize as null
   const [selectedDate, setSelectedDate] = useState("");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [doctor, setDoctor] = useState([]);
+
+  // Fetch doctor data
+  useEffect(() => {
+    const getDoc = async () => {
+      try {
+        const res = await axios.get("http://localhost:3001/allDoc", {
+          withCredentials: true,
+        });
+        console.log("Doctors fetched:", res.data);
+        setDoctor(res.data); // Store doctors in state
+      } catch (err) {
+        console.error("Error fetching doctors:", err);
+      }
+    };
+    getDoc();
+    console.log(doctor);
+  }, []);
+
+  const handleBooking = async () => {
+    if (!selectedUser || !selectedDate) {
+      alert("Please select a doctor and a date.");
+      return;
+    }
+
+    try {
+      const updatedDoctor = {
+        date: selectedDate,
+        status: "Booked", // Set the status to "Booked"
+      };
+
+      // Send the updated doctor data to the backend
+      const res = await axios.put(
+        `http://localhost:3001/bookDoctor/${selectedUser._id}`,
+        updatedDoctor,
+        {
+          withCredentials: true,
+        }
+      );
+
+      // Show success and update frontend if needed
+      console.log("Doctor booked successfully:", res.data);
+      alert(`Appointment booked for Dr. ${selectedUser.name}`);
+      setSelectedUser(null); // Clear selected doctor
+      setSelectedDate(""); // Clear selected date
+      setOpen(!open);
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      alert("Failed to book appointment. Please try again.");
+    }
+  };
 
   const handleName = (e) => {
-    const userId = parseInt(e.target.value, 10);
-    const user = doctor.find((user) => user.id === userId);
-    setSelectedUser(e.target.value);
-    setSelectedUser(user); // Update the selected user
+    const userId = e.target.value; // Get selected value (doctor ID)
+    const user = doctor.find((doc) => doc._id === userId); // Find the doctor by ID
+    setSelectedUser(user); // Update selected user
   };
 
   const handleDateChange = (e) => {
@@ -28,42 +78,51 @@ const AddAppointment = () => {
     <div className="flex flex-col justify-center">
       <div className="border-2 rounded-xl border-[#007EA7] w-[500px] h-[650px] mt-[30px] bg-[#F1F7F9]">
         <div className="my-[80px]">
+          {/* Dropdown */}
           <label htmlFor="options" className="text-[20px] font-semibold mx-1">
-            Choose an option:
+            Choose a Doctor:
           </label>
-          <select id="options" value={selectedUser} onChange={handleName}>
+          <select
+            id="options"
+            value={selectedUser?._id || ""}
+            onChange={handleName}
+          >
             <option value="" disabled>
-              Doctors
+              Select a doctor
             </option>
-            {doctor.map((item, index) => (
-              <option value={item.id} key={item.id}>
-                {item.name}
+            {doctor.map((doc) => (
+              <option value={doc._id} key={doc._id}>
+                {doc.name}
               </option>
             ))}
           </select>
+
+          {/* Doctor details */}
           <div className="flex flex-col justify-center items-center mt-[50px] gap-3">
             <p className="text-[18px] font-semibold">First Name</p>
             <input
               type="text"
-              placeholder={selectedUser.name}
+              placeholder={selectedUser?.name || "N/A"}
               disabled
-              className="bg-[#CFE6EE] border-none text-[18px] placeholder-[#007EA7]  text-center p-0"
+              className="bg-[#CFE6EE] border-none text-[18px] placeholder-[#007EA7] text-center p-0"
             />
             <p className="text-[18px] font-semibold">Last Name</p>
             <input
               type="text"
-              placeholder={selectedUser.lastName}
+              placeholder={selectedUser?.lastName || "N/A"}
               disabled
               className="bg-[#CFE6EE] border-none text-[18px] placeholder-[#007EA7] text-center p-0"
             />
             <p className="text-[18px] font-semibold">Phone Number</p>
             <input
               type="text"
-              placeholder={selectedUser.phone}
+              placeholder={selectedUser?.number || "N/A"}
               disabled
-              className="bg-[#CFE6EE] border-none text-[18px] placeholder-[#007EA7]  text-center p-0"
+              className="bg-[#CFE6EE] border-none text-[18px] placeholder-[#007EA7] text-center p-0"
             />
           </div>
+
+          {/* Date Picker */}
           <div className="flex flex-col gap-7 justify-center items-center">
             <div className="mt-[20px] mb-[30px] h-[60px]">
               <label htmlFor="dateInput" className="text-[18px] font-semibold">
@@ -82,13 +141,15 @@ const AddAppointment = () => {
               )}
             </div>
           </div>
+
+          {/* Submit Button */}
           <div className="flex justify-center">
             <button
-              onClick={(e) => setOpen(!open)}
+              onClick={handleBooking}
               className="flex justify-center items-center bg-[#007EA7] text-white h-[40px] w-[200px] rounded-lg gap-2"
             >
               <FaPlus />
-              Add
+              Book
             </button>
           </div>
         </div>

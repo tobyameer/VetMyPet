@@ -1,32 +1,31 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import background from "../images/background_vet.png";
 import axios from "axios";
 
-const Signup = () => {
+const DoctorSignup = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/userSignup", {
+      .post("http://localhost:3001/docSignup", {
         name,
         lastName,
-        email,
+        number,
         password,
       })
       .then((result) => {
-        if (result.status == 201) {
-          navigate("/login");
+        if (result.status === 201) {
+          navigate("/doctorLogin");
           console.log("User Created Successfully!");
         }
       })
       .catch((err) => {
-        if (err.response && err.response.status === 400) {
+        if (err.response && err.response.status === 401) {
           window.alert("Email already exists. Please use a different email");
         } else {
           console.log(err);
@@ -39,7 +38,7 @@ const Signup = () => {
       {/* Logo */}
       <div className="flex w-full h-screen items-center justify-center">
         <div className="border border-[#7FBED3] w-[500px] h-[680px] rounded-3xl bg-white flex flex-col items-center justify-center">
-          <h1 className="my-[10px] text-[22px] text-center ">Sign Up</h1>
+          <h1 className="my-[10px] text-[22px] text-center ">Signup</h1>
           <div className="flex flex-col">
             <p className="my-[6px] font-semibold text-[18px]">First Name</p>
             <div className="flex items-center pl-4 border-none bg-gray-100 w-[300px] rounded-xl h-[45px]">
@@ -59,12 +58,12 @@ const Signup = () => {
                 className="border-none p-3 bg-inherit placeholder-[gray] hover:outline-none hover:ring-0 hover:border-transparent "
               />
             </div>
-            <p className="my-[6px] font-semibold text-[18px]">Email</p>
+            <p className="my-[6px] font-semibold text-[18px]">Number</p>
             <div className="flex items-center pl-4 border-none bg-gray-100 w-[300px] rounded-xl h-[45px]">
               <input
-                onChange={(e) => setEmail(e.target.value)}
-                type="text"
-                placeholder="Email"
+                onChange={(e) => setNumber(e.target.value)}
+                type="number"
+                placeholder="Number"
                 className="border-none p-3 bg-inherit placeholder-[gray] hover:outline-none hover:ring-0 hover:border-transparent "
               />
             </div>
@@ -102,7 +101,7 @@ const Signup = () => {
               Already have an account?
             </p>
             <p className="text-[12px] ml-1 text-blue-300">
-              <Link to="/login">
+              <Link to="/doctorLogin">
                 <a href="" className="text-[#007EA7]">
                   Login
                 </a>
@@ -115,4 +114,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default DoctorSignup;

@@ -1,4 +1,4 @@
-export const doctor = [
+export const doc = [
   {
     id: 1,
     name: "john",
