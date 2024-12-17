@@ -46,7 +46,7 @@ const AddAppointment = ({ open, setOpen }) => {
         doctorName: selectedUser.name,
         doctorLastName: selectedUser.lastName,
         doctorNumber: selectedUser.number,
-        doctorDate: selectedUser.date,
+        doctorDate: formatDate(selectedDate),
         doctorStatus: selectedUser.status,
       };
 
@@ -91,8 +91,17 @@ const AddAppointment = ({ open, setOpen }) => {
   const formatDate = (dateString) => {
     if (!dateString) return ""; // Handle empty date
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB"); // Format as DD/MM/YYYY
+
+    // Format: day, month (text), year
+    return date.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long", // Full month name (e.g., "June")
+      year: "numeric",
+    });
   };
+
+  // Example usage:
+  console.log(formatDate("2024-06-22")); // Output: "22 June 2024"
 
   return (
     <div className="flex flex-col justify-center ">

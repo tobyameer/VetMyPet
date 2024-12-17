@@ -7,6 +7,7 @@ import UserSignup from "./pages/UserSignup";
 import DoctorLogin from "./pages/DoctorLogin";
 import DoctorSignup from "./pages/DoctorSignup";
 import Map from "./pages/Map";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/userSignup" element={<UserSignup />} />
       <Route path="/doctorLogin" element={<DoctorLogin />} />
       <Route path="/doctorSignup" element={<DoctorSignup />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

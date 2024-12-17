@@ -35,6 +35,9 @@ const ItemList = () => {
       alert("Failed to delete the appointment. Please try again.");
     }
   };
+  const handleClick = () => {
+    alert("Emergency Call 911");
+  };
 
   return (
     <div className="mx-[50px]">
@@ -81,8 +84,11 @@ const ItemList = () => {
             <p>{doctor.doctorDate || "N/A"}</p>
             <p>{doctor.doctorStatus ? "Booked" : "Available"}</p>
             <div className="flex justify-center col-span-2">
-              <button className="bg-[#007EA7] text-white h-[28px] w-[90px] rounded-lg text-[14px] font-semibold">
-                {doctor.status ? "Booked" : "Book Now"}
+              <button
+                onClick={handleClick}
+                className="bg-[#007EA7] text-white h-[28px] w-[90px] rounded-lg text-[14px] font-semibold"
+              >
+                Call
               </button>
               <button className="bg-[#007EA7] text-white h-[28px] w-[90px] rounded-lg text-[14px] font-semibold mx-3">
                 Edit

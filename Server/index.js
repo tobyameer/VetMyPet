@@ -99,6 +99,20 @@ app.post("/userLogin", async (req, res) => {
   }
 });
 
+app.get("/getUser/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await UserModel.findById(userId);
+    if (user) {
+      res.json({ user: req.session.user });
+    } else {
+      res.status(404).json("No Records found");
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get("/user", async (req, res) => {
   if (req.session.user) {
     res.json({ user: req.session.user });
