@@ -85,10 +85,9 @@ app.post("/userLogin", async (req, res) => {
           name: user.name,
           lastName: user.lastName,
           email: user.email,
+          success: "Success",
         };
-        res.json("Success");
-        console.log(email);
-        console.log(user.name);
+        res.json(req.session.user);
       } else {
         res.status(401).json("Password dose'nt match");
       }
@@ -100,7 +99,7 @@ app.post("/userLogin", async (req, res) => {
   }
 });
 
-app.get("/user", (req, res) => {
+app.get("/user", async (req, res) => {
   if (req.session.user) {
     res.json({ user: req.session.user });
   } else {

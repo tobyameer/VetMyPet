@@ -19,12 +19,16 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((result) => {
-        if (result.data === "Success") {
+        if (result.data.success === "Success") {
+          // Fetch user data from the /user route after login
           axios
             .get("http://localhost:3001/user", { withCredentials: true })
             .then((response) => {
               if (response.data.user) {
                 navigate("/", { state: { user: response.data.user } });
+                const user = response.data.user;
+                console.log("User ID:", user.id); // Debugging line
+                localStorage.setItem("Users ID:", user.id); // saving user id into the local storage
               }
             });
           console.log("Login Successfully!");

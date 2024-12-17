@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { IoArrowBackOutline } from "react-icons/io5";
 
-const AddAppointment = () => {
+const AddAppointment = ({ open, setOpen }) => {
   const [selectedUser, setSelectedUser] = useState(null); // Initialize as null
   const [selectedDate, setSelectedDate] = useState("");
-  const [open, setOpen] = useState(true);
   const [doctor, setDoctor] = useState([]);
 
   // Fetch doctor data
@@ -37,8 +37,27 @@ const AddAppointment = () => {
         status: "Booked", // Set the status to "Booked"
       };
 
-      // Send the updated doctor data to the backend
-      const res = await axios.put(
+      const addDoctorAppointment = JSON.parse(
+        localStorage.getItem("Doctor Appointment:") || "[]"
+      );
+
+      const newDoctorAppointment = {
+        doctorId: selectedUser._id,
+        doctorName: selectedUser.name,
+        doctorLastName: selectedUser.lastName,
+        doctorNumber: selectedUser.number,
+        doctorDate: selectedUser.date,
+        doctorStatus: selectedUser.status,
+      };
+
+      addDoctorAppointment.push(newDoctorAppointment);
+
+      localStorage.setItem(
+        "Doctor Appointment:",
+        JSON.stringify(addDoctorAppointment)
+      );
+
+      const res1 = await axios.put(
         `http://localhost:3001/bookDoctor/${selectedUser._id}`,
         updatedDoctor,
         {
@@ -47,7 +66,8 @@ const AddAppointment = () => {
       );
 
       // Show success and update frontend if needed
-      console.log("Doctor booked successfully:", res.data);
+      console.log("Doctor booked successfully:", res1.data);
+
       alert(`Appointment booked for Dr. ${selectedUser.name}`);
       setSelectedUser(null); // Clear selected doctor
       setSelectedDate(""); // Clear selected date
@@ -75,8 +95,15 @@ const AddAppointment = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center">
-      <div className="border-2 rounded-xl border-[#007EA7] w-[500px] h-[650px] mt-[30px] bg-[#F1F7F9]">
+    <div className="flex flex-col justify-center ">
+      <div className="relative border-2 rounded-xl border-[#7FBED3] w-[500px] h-[650px] mt-[30px] bg-[#F1F7F9]">
+        <button
+          onClick={(e) => setOpen(!open)}
+          className="absolute top-[5%] left-[6%] flex justify-center items-center gap-1 bg-[#7FBED3] text-white w-[80px] h-[30px] rounded-lg"
+        >
+          <IoArrowBackOutline />
+          Back
+        </button>
         <div className="my-[80px]">
           {/* Dropdown */}
           <label htmlFor="options" className="text-[20px] font-semibold mx-1">
@@ -146,7 +173,7 @@ const AddAppointment = () => {
           <div className="flex justify-center">
             <button
               onClick={handleBooking}
-              className="flex justify-center items-center bg-[#007EA7] text-white h-[40px] w-[200px] rounded-lg gap-2"
+              className="flex justify-center items-center bg-[#3fc59e] text-white h-[40px] w-[200px] rounded-lg gap-2"
             >
               <FaPlus />
               Book

@@ -41,9 +41,13 @@ const Appointments = () => {
 
         {/* Filter */}
         <div className="mt-[20px]">
-          <div className="flex justify-center text-center m-5 w-screen">
+          <div className="flex justify-center text-center mb-5">
             {/* List */}
-            {!open ? <ItemList /> : <AddAppointment />}
+            {!open ? (
+              <ItemList />
+            ) : (
+              <AddAppointment open={open} setOpen={setOpen} />
+            )}
           </div>
         </div>
       </div>
