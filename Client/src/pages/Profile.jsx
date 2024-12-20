@@ -1,25 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-
+import UserProfile from "../components/UserProfile";
+import UserEditProfile from "../components/UserEditProfile";
+import UserSecurity from "../components/UserSecurity";
+import UserPets from "../components/UserPets";
 const Profile = () => {
+  const [clicked, setClicked] = useState("profile");
+
+  console.log(clicked);
+
   return (
-    <div>
+    <div className="">
       <Navbar />
-      <div className="flex flex-row ">
+      <div className="flex justify-evenly">
         {/* sidebar */}
-        <div className="flex flex-col items-center w-[350px] h-screen">
-          <div className="flex items-center h-[100px]">
-            <h1>Fix My Pet</h1>
-          </div>
-          <button className="w-fill h-[60px] bg-[#EFF6F9] text-white">
+        <div className="flex flex-col items-center w-[450px] h-screen mt-[100px] gap-[45px] text-[20px] text-[#53595B] font-semibold">
+          <button
+            onClick={(e) => setClicked("profile")}
+            className="w-[250px] h-[65px] bg-[#EFF6F9] hover:text-black hover:bg-[#DFEEF4] rounded-lg"
+          >
             Profile
           </button>
-          <button>Edit Profile</button>
-          <button>Security</button>
-          <button>Pets</button>
+          <button
+            onClick={(e) => setClicked("edit")}
+            className="w-[250px] h-[65px] bg-[#EFF6F9] hover:text-black hover:bg-[#DFEEF4] rounded-lg"
+          >
+            Edit Profile
+          </button>
+          <button
+            onClick={(e) => setClicked("security")}
+            className="w-[250px] h-[65px]  hover:text-black hover:bg-[#DFEEF4] rounded-lg"
+          >
+            Security
+          </button>
+          <button
+            onClick={(e) => setClicked("pets")}
+            className="w-[250px] h-[65px]  hover:text-black hover:bg-[#DFEEF4] rounded-lg"
+          >
+            Pets
+          </button>
         </div>
         {/* main */}
-        <div>hi</div>
+        <UserProfile clicked={clicked} />
+        <UserEditProfile clicked={clicked} />
+        <UserSecurity clicked={clicked} />
+        <UserPets clicked={clicked} />
       </div>
     </div>
   );

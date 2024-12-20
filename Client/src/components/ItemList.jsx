@@ -70,7 +70,7 @@ const ItemList = () => {
       </div>
 
       {/* Render doctor data */}
-      {doctor.length > 0 ? (
+      {doctor && doctor.length > 0 ? (
         doctor.map((doctor, index) => (
           <div
             key={index}
