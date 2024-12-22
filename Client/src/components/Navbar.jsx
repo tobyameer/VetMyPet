@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [login, setLogin] = useState("");
+  const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +32,13 @@ const Navbar = () => {
     }
   }, []);
 
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => setScroll(window.scrollY > 100);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleLogOut = () => {
     navigate("/");
     localStorage.clear();
@@ -39,13 +47,21 @@ const Navbar = () => {
 
   return (
     <div
-      style={{ background: "#007EA7" }}
-      className=" text-white h-[80px] flex justify-between w-screen px-[50px]"
+      onScroll={() => setScroll(true)}
+      className={`${
+        scroll
+          ? "sticky z-[10] transition-all duration-300 bg-[#00526c] shadow-md top-0 text-white h-[120px]"
+          : "bg-inherit top-0 text-black h-[120px]"
+      } flex justify-between items-center w-screen px-[50px]`}
     >
-      <div className="flex items-center font-bold">Fix My Pet</div>
+      <Link to="/">
+        <div className="flex items-center font-bold text-[25px]">
+          Fix My Pet
+        </div>
+      </Link>
 
       {/* Middle */}
-      <div className="flex">
+      <div className="flex text-[20px]">
         <button className="mx-3">
           <Link to="/">Home</Link>
         </button>
@@ -58,8 +74,14 @@ const Navbar = () => {
         </button>
       </div>
       {/* END */}
-      <div className="flex justify-between items-center w-[29%] lg:w-[19%] xl:w-[17%]:">
-        <div className="flex">
+      <div
+        className={
+          login == "Login"
+            ? "flex justify-center items-center w-[29%] lg:w-[19%] xl:w-[17%]"
+            : "flex items-center w-[29%] lg:w-[19%] xl:w-[17%]"
+        }
+      >
+        <div className="flex mx-5">
           <TbWorld size={16} style={{ marginTop: "4px" }} />
           <button className="ml-1">EN</button>
         </div>
@@ -74,7 +96,7 @@ const Navbar = () => {
         <div className={login == "Login" ? "hidden" : ""}>
           <button
             onClick={handleLogOut}
-            className="flex justify-center items-center gap-1"
+            className="flex mx-3 justify-center items-center gap-1"
           >
             Sign out
             <IoLogInOutline />

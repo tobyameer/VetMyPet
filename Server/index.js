@@ -13,10 +13,11 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+// Add CORS middleware before any routes
 app.use(
   cors({
-    origin: process.env.FRONT_URL,
-    credentials: true,
+    origin: process.env.FRONT_URL, // Allow your frontend domain
+    credentials: true, // Allow cookies to be sent with the request
   })
 );
 
@@ -66,9 +67,12 @@ app.post("/userSignup", async (req, res) => {
       password: hashedPassword,
     });
     const savedUser = await newUser.save();
-    express.status(201).json(savedUser);
+    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error occurred during signup:", error);
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 

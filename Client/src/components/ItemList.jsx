@@ -40,9 +40,9 @@ const ItemList = () => {
   };
 
   return (
-    <div className="mx-[50px]">
+    <div className="">
       {/* Header for table */}
-      <div className="grid grid-cols-7 items-center h-[35px] rounded-xl max-w-[90%]">
+      <div className="grid grid-cols-7 items-center h-[35px] rounded-xl">
         <div>
           <button className="text-black-300 font-bold text-[12px]">
             First Name
@@ -74,7 +74,7 @@ const ItemList = () => {
         doctor.map((doctor, index) => (
           <div
             key={index}
-            className={`grid grid-cols-7 py-5 max-w-[90%] ${
+            className={`grid grid-cols-7 py-5 w-[100%] md:text-[15px] lg:text-[20px] text-[13px] ${
               doctor.doctorStatus ? "bg-[#EFF6F9]" : "bg-white"
             } items-center`}
           >

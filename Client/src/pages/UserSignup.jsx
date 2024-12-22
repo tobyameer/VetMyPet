@@ -13,23 +13,29 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/userSignup", {
-        name,
-        lastName,
-        email,
-        password,
-      })
+      .post(
+        "http://localhost:3001/userSignup",
+        {
+          name,
+          lastName,
+          email,
+          password,
+        },
+        { withCredentials: true }
+      ) // Make sure this is set if you rely on cookies)
       .then((result) => {
+        console.log(result); // Log the result to check
         if (result.status === 201) {
-          navigate("/login");
           console.log("User Created Successfully!");
+          navigate("/userLogin"); // Navigate without timeout
         }
       })
       .catch((err) => {
+        console.log(err); // Log the error
         if (err.response && err.response.status === 400) {
           window.alert("Email already exists. Please use a different email");
         } else {
-          console.log(err);
+          console.log("Error occurred during signup", err);
         }
       });
   };

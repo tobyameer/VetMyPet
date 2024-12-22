@@ -36,7 +36,7 @@ const UserProfile = ({ clicked }) => {
           : "hidden"
       }
     >
-      <div className=" bg-[#3fc59e] h-[180px] rounded-tl-3xl" />
+      <div className=" bg-[#EFF6F9] h-[180px] rounded-tl-3xl" />
       <div className="flex justify-between items-center h-[120px] mb-[100px]">
         <FaUserCircle
           size={170}

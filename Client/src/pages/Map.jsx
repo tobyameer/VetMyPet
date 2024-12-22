@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 
 const Map = () => {
   return (
-    <div className="m-0 p-0 flex flex-col min-h-screen overflow-hidden">
+    <div className="bg-gradient-to-b from-[#EFF6F9]  to-[#AFD6E3] m-0 p-0 flex flex-col min-h-screen overflow-hidden">
       <Navbar />
       <div>
         <iframe

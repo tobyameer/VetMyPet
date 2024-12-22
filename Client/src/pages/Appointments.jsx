@@ -10,7 +10,7 @@ const Appointments = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-white overflow-x-hidden">
+    <div className="bg-gradient-to-b from-[#EFF6F9]  to-[#AFD6E3] h-screen overflow-x-hidden">
       <Navbar />
       <div className="mx-[50px]">
         {/* Header */}
